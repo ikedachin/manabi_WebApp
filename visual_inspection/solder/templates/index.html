@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>solder inspection app</title>
+</head>
+<body>
+    <h2>Solder Inspection</h2>
+    <div>
+        <button>start</button>
+        <button>stpp</button><br>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+        <div>
+            <!-- <h2>入力画像</h2> -->
+            <!-- <input type="img" id="imageInput" accept="image/*"> -->
+            <img id="inputImage" src="" alt="選択された画像" width="300">
+            <img id="inputImage" src="" alt="選択された画像" width="300">
+            <p>1秒ごとに選択画像を変えて、推論結果を右側としたのコメントを出すアプリ</p>
+        </div>
+    
+        <div>
+            <h2>推論結果</h2>
+            <p id="inferenceResult">〇〇✖️✖️</p>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="{% static 'main.js %}"></script>
+    
+</body>
+</html>
