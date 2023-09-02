@@ -35,3 +35,39 @@ visual_inspection/solder/static # CSS,JavaScript
 cd solder/applications
 git clone https://github.com/ultralytics/yolov5.git
 
+
+- visual_inspection/visual_inspection/settings.pyの修正
+    - staticフォルダに保存したJavaScript、CSSををリンクづける
+
+```
+STATICFILES_DIRS =[
+    BASE_DIR / 'solder/static',
+]
+```
+
+-   
+    - アプリの定義を行う
+
+```
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'solder', <= add
+]
+```
+
+soler/urls.pyを作る
+```
+from django.urls import path
+from . import views
+
+app_name = 'person'
+urlpatterns = [
+    path('', views.PersonListView.as_view())
+]
+
+```
