@@ -4,6 +4,10 @@ from django.http import JsonResponse, HttpRequest
 import glob
 import os
 import shutil
+import cv2
+import argparse
+from .applications.yolov5.detect import run, main
+from .applications.preprosess.mask_edge_image import crop_image
 
 # Create your views here.
 
@@ -37,16 +41,36 @@ def get_image_path(request, type_name):
 
 import time
 
+# 推論条件を作っておく
+# }
+
 def inspction_image(request, type_name):
-    print('aaa')
+    # opt_yolo = parse_opt()
+    # opt_yolo.weights = './applications/yolov5/runs/train/masked_edge/weights/best.pt'
+    # opt_yolo.project = '../../static/inspected_image/'
+    # opt_yolo.conf = 0.66
+    # opt_yolo.save_text = True
+    # opt_yolo.name = ''
+    # opt_yolo.exist_ok = True
+    basename = type_name.replace('.jpeg', '.png')
+    print(basename)
     inspected_dir = './solder/static/inspected_image/'
-    shutil.copy(raw_images[type_name], inspected_dir) # ここの代わりにYOLOでの推論を入れる
-
-    basename = os.path.basename(type_name)
+    masked_edge_image = './solder/static/masked_edge/' + basename
+    masked_edge = crop_image(raw_images[type_name])
+    cv2.imwrite(masked_edge_image, masked_edge)
+    # ここまでOK
+    run(
+        weights='./solder/applications/yolov5/runs/runs_masked_edge/train/masked_edge/weights/best.pt',
+        project='./solder/static/inspected_image/',
+        source=masked_edge_image,
+        conf_thres=0.66,
+        save_conf=True,
+        name='',
+        exist_ok=True,  
+    )
     inspected_path = inspected_dir + basename
-    inspected_row = {os.path.basename(type_name): inspected_path}
+    # inspected_path = inspected_dir
+    inspected_row = {basename: inspected_path}
     print(inspected_row)
-    time.sleep(1)
     return JsonResponse(inspected_row)
-
 
