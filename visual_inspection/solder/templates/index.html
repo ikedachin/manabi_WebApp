@@ -65,8 +65,7 @@
                 };
             });
         };
-        get_image(url_to_getlist);
-        console.log(fileName.textContent);
+        get_image(url_to_getlist)
         
         // YOLOで推論
         let outputImage = document.getElementById('output_image');
@@ -80,19 +79,14 @@
                 console.log(data)
                 for(let key in data) {
                     console.log(key);
-                    outputImage.src = data[key];
-                    // fileName.appendChild(p1);
+                    outputImage.src = data[key]
                     console.log(data[key]);
-                    // let image_path = data[key];
-                    // inputImage.src =  data[key];
-                    // console.log(inputImage.src)
+
                 };
             });
-        }
-        setInterval(
-            yolo_inspetion(url_to_yolo),
-            10000
-        );
+        };
+        yolo_inspetion(url_to_yolo);
+        
     </script>
 </body>
 </html>
