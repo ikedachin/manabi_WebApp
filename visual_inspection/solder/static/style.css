@@ -1,6 +1,10 @@
 body {
     font-family: Arial, sans-serif;
     font-size: 1rem;
-    /* color: #ffffff; */
+    color: #ffffff;
     background-color: #000000;  /* 背景色を黒色に設定 */
-  }
+}
+
+.width300 {
+  width: 300px;
+}

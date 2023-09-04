@@ -60,14 +60,13 @@ INSTALLED_APPS = [
 ]
 ```
 
-soler/urls.pyを作る
+solder/urls.pyを作る
 ```
 from django.urls import path
 from . import views
 
-app_name = 'person'
 urlpatterns = [
-    path('', views.PersonListView.as_view())
+    path('index.html', views.image_path.as_view(), name='index')
 ]
 
 ```

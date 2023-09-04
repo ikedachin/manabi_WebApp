@@ -12,17 +12,21 @@
     <h2>Solder Inspection</h2>
     <div>
         <button>start</button>
-        <button>stpp</button><br>
+        <button>stop</button><br>
     </div>
     <br>
     <br>
+    <div>
+        <p>ファイル名:  </p>
+        <p id = file_name></p>
+    </div>
     <br>
     <div class="container">
         <div>
             <!-- <h2>入力画像</h2> -->
             <!-- <input type="img" id="imageInput" accept="image/*"> -->
-            <img id="inputImage" src="" alt="選択された画像" width="300">
-            <img id="inputImage" src="" alt="選択された画像" width="300">
+            <img id="input_image" src="" alt="選択された画像" width="300">
+            <img id="output_image" src="" alt="選択された画像" width="300">
             <p>1秒ごとに選択画像を変えて、推論結果を右側としたのコメントを出すアプリ</p>
         </div>
     
@@ -32,7 +36,63 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="{% static 'main.js %}"></script>
-    
+    <script type="text/javascript" src="{% static 'main.js' %}"></script>
+    <script>
+        const fileName = document.getElementById('file_name')
+        let inputImage = document.getElementById('input_image')
+        const url_to_getlist = `{% url 'get_image_path' 'TYPE_PLACEHOLDER' %}`.replace('TYPE_PLACEHOLDER', '5');
+        console.log(url_to_getlist);
+        
+        let p1 = document.createElement('p');
+        let p2 = document.createElement('p');
+        
+        p1.innerHTML = "";
+        p2.innerHTML = "";
+        
+        const get_image = function(rul_to_getlist) {
+            fetch(url_to_getlist)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                for(let key in data) {
+                    console.log(key);
+                    p1.textContent = key;
+                    fileName.appendChild(p1);
+                    console.log(data[key]);
+                    let image_path = data[key];
+                    inputImage.src =  data[key];
+                    console.log(inputImage.src);
+                };
+            });
+        };
+        get_image(url_to_getlist);
+        console.log(fileName.textContent);
+        
+        // YOLOで推論
+        let outputImage = document.getElementById('output_image');
+        let url_to_yolo = `{% url 'inspction_image' 'TYPE_PLACEHOLDER' %}`.replace('TYPE_PLACEHOLDER', '005.jpeg');
+        console.log(url_to_yolo);
+
+        const yolo_inspetion = function(url_to_yolo) {
+            fetch(url_to_yolo)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                for(let key in data) {
+                    console.log(key);
+                    outputImage.src = data[key];
+                    // fileName.appendChild(p1);
+                    console.log(data[key]);
+                    // let image_path = data[key];
+                    // inputImage.src =  data[key];
+                    // console.log(inputImage.src)
+                };
+            });
+        }
+        setInterval(
+            yolo_inspetion(url_to_yolo),
+            10000
+        );
+    </script>
 </body>
 </html>

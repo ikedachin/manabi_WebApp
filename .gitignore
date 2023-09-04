@@ -1,2 +1,4 @@
 /webapp_env
 /visual_inspection/solder/applications/yolov5
+/visual_inspection/solder/static/raw_images
+/visual_inspection/solder/static/inspected_images
