@@ -63,8 +63,10 @@ def inspction_image(request, type_name):
         weights='./solder/applications/yolov5/runs/runs_masked_edge/train/masked_edge/weights/best.pt',
         project='./solder/static/inspected_image/',
         source=masked_edge_image,
-        conf_thres=0.66,
-        save_conf=True,
+        conf_thres=0.632,
+        save_conf = True,
+        save_txt = True,
+        # save_conf = True,
         name='',
         exist_ok=True,  
     )

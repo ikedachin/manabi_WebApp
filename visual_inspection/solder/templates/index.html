@@ -40,7 +40,7 @@
     <script>
         const fileName = document.getElementById('file_name')
         let inputImage = document.getElementById('input_image')
-        const url_to_getlist = `{% url 'get_image_path' 'TYPE_PLACEHOLDER' %}`.replace('TYPE_PLACEHOLDER', '5');
+        const url_to_getlist = `{% url 'get_image_path' 'TYPE_PLACEHOLDER' %}`.replace('TYPE_PLACEHOLDER', '4');
         console.log(url_to_getlist);
         
         let p1 = document.createElement('p');
@@ -69,7 +69,7 @@
         
         // YOLOで推論
         let outputImage = document.getElementById('output_image');
-        let url_to_yolo = `{% url 'inspction_image' 'TYPE_PLACEHOLDER' %}`.replace('TYPE_PLACEHOLDER', '005.jpeg');
+        let url_to_yolo = `{% url 'inspction_image' 'TYPE_PLACEHOLDER' %}`.replace('TYPE_PLACEHOLDER', '004.jpeg');
         console.log(url_to_yolo);
 
         const yolo_inspetion = function(url_to_yolo) {
