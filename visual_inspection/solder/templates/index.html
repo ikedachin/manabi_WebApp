@@ -18,15 +18,15 @@
     <br>
     <div>
         <p>ファイル名:  </p>
-        <p id = file_name></p>
+        <span id = file_name class="model_display"></span>
     </div>
     <br>
     <div class="container">
         <div>
             <!-- <h2>入力画像</h2> -->
             <!-- <input type="img" id="imageInput" accept="image/*"> -->
-            <img id="input_image" src="" alt="選択された画像" width="300">
-            <img id="output_image" src="" alt="選択された画像" width="300">
+            <img id="input_image" src="" alt="選択された画像" class="height300">
+            <img id="output_image" src="" alt="選択された画像" class="height300">
             <p>1秒ごとに選択画像を変えて、推論結果を右側としたのコメントを出すアプリ</p>
         </div>
     
@@ -40,11 +40,13 @@
     <script>
         const fileName = document.getElementById('file_name')
         let inputImage = document.getElementById('input_image')
-        const url_to_getlist = `{% url 'get_image_path' 'TYPE_PLACEHOLDER' %}`.replace('TYPE_PLACEHOLDER', '4');
+        // const url_to_getlist = `{% url 'get_image_path' 'TYPE_PLACEHOLDER' %}`.replace('TYPE_PLACEHOLDER', '4');
+        const url_to_getlist = `{% url 'get_image_path' 'image_list' %}`;
         console.log(url_to_getlist);
         
         let p1 = document.createElement('p');
         let p2 = document.createElement('p');
+        let images = [];
         
         p1.innerHTML = "";
         p2.innerHTML = "";
@@ -55,37 +57,59 @@
             .then(data => {
                 console.log(data)
                 for(let key in data) {
-                    console.log(key);
-                    p1.textContent = key;
-                    fileName.appendChild(p1);
-                    console.log(data[key]);
-                    let image_path = data[key];
-                    inputImage.src =  data[key];
-                    console.log(inputImage.src);
+                    json_to_list = {}
+                    json_to_list['filename'] = key;
+                    json_to_list['src'] = data[key];
+                    images.push(json_to_list);
                 };
+                console.log(images[0].filename);
             });
         };
-        get_image(url_to_getlist)
-        
-        // YOLOで推論
-        let outputImage = document.getElementById('output_image');
-        let url_to_yolo = `{% url 'inspction_image' 'TYPE_PLACEHOLDER' %}`.replace('TYPE_PLACEHOLDER', '004.jpeg');
-        console.log(url_to_yolo);
+        get_image(url_to_getlist);
+        console.log(images);
+        // 毎秒imagesから取り出して表示、推論する
+        let timer1 = null;
+        let cnt = 0;
 
-        const yolo_inspetion = function(url_to_yolo) {
-            fetch(url_to_yolo)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-                for(let key in data) {
-                    console.log(key);
-                    outputImage.src = data[key]
-                    console.log(data[key]);
-
-                };
-            });
+        function event() {
+            cnt++;
+            if (cnt >= 10 && timer1 != null) {
+            // if (cnt >= image.length-1 && timer1 != null) { # 本番用
+                // 5回以上表示したら、タイマーを停止する
+                clearInterval(timer1);
+            }
+            // 1000ミリ秒ごとにコンソールに表示
+            console.log(images[cnt].filename + '.jpeg');
+            p1.textContent = images[cnt].filename + '.jpeg';
+            fileName.appendChild(p1);
+            inputImage.src = images[cnt].src;
+            
+            
+            
+            // ここまではOK
+            
+            // YOLOで推論
+            let outputImage = document.getElementById('output_image');
+            let url_to_yolo = `{% url 'inspction_image' 'TYPE_PLACEHOLDER' %}`.replace('TYPE_PLACEHOLDER', p1.textContent);
+            console.log(url_to_yolo);
+            
+            const yolo_inspetion = function(url_to_yolo) {
+                fetch(url_to_yolo)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                    for(let key in data) {
+                        console.log(key);
+                        outputImage.src = data[key]
+                        console.log(data[key]);
+                        
+                    };
+                });
+            };
+            yolo_inspetion(url_to_yolo);
         };
-        yolo_inspetion(url_to_yolo);
+        // タイマー開始
+        timer1 = setInterval(event, 2000);
         
     </script>
 </body>

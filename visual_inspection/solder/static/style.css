@@ -7,4 +7,17 @@ body {
 
 .width300 {
   width: 300px;
+  vertical-align: top;
+}
+
+.height300 {
+  height: 300px;
+  vertical-align: top;
+}
+
+span.model_display {
+  color: #ffffff;
+  background-color: chocolate;
+  font-size: 1.5rem;
+  /* margin: 10px; */
 }
