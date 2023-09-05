@@ -85,7 +85,7 @@ def inspction_image(request, type_name):
     inspected_path = inspected_dir + basename
     # inspected_path = inspected_dir
     inspected_row = {basename: inspected_path}
-    print(inspected_row)
+    # print(inspected_row)
     return JsonResponse(inspected_row)
 
 """
