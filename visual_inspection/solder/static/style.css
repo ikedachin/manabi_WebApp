@@ -15,9 +15,114 @@ body {
   vertical-align: top;
 }
 
-span.model_display {
+span.anomaly {
   color: #ffffff;
   background-color: chocolate;
   font-size: 1.5rem;
-  /* margin: 10px; */
+  padding: 5px;
+  margin: 10px;
+}
+
+span.model_display {
+  color: #ffffff;
+  /* background-color: chocolate; */
+  font-size: 1.5rem;
+  margin: 10px;
+}
+
+/* ************************* */
+
+
+/* ###################### */
+/* アラート、警告用 */
+
+div.div-center {
+  font-size: 4rem;
+  color: #ffffff;
+  text-align: center;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+div.div-warning {
+  font-size: 4rem;
+  color: #000000;
+  background-color: yellow;
+  text-align: center;
+  margin-right: 10px;
+  margin-left: 10px;
+  
+}
+
+div.div-alart {
+  font-size: 4rem;
+  font-weight: 700;
+  color: lightgreen;
+  background-color: red;
+  text-align: center;
+  margin-right: 10px;
+  margin-left: 10px;
+
+}
+
+
+
+/* startbutton */
+.btn--orange,
+button.btn--orange {
+  color: #fff;
+  font-size: 1.5rem;
+  background-color: #eb6100;
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.btn--orange:hover,
+button.btn--orange:hover {
+  font-size: 1.5rem;
+  color: #fff;
+  background: #f5bc00;
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+button.btn--radius {
+  font-size: 1.5rem;
+  border-radius: 50vh;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* stopButton */
+.btn--gray,
+button.btn--gray {
+    color: #fff;
+    font-size: 1.5rem;
+    background-color: #615b57;
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.btn--gray:hover,
+button.btn--gray:hover {
+    font-size: 1.5rem;
+    color: #fff;
+    background: #ada7a1;
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+button.btn--radius {
+    font-size: 1.5rem;
+    border-radius: 50vh;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.center {
+  text-align: center;
 }
