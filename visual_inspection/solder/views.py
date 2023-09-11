@@ -60,7 +60,7 @@ def inspction_image(request, type_name):
         weights='solder/applications/yolov5/runs/masked_edge_96e/weights/best.pt', # masked_edge
         # weights='solder/applications/yolov5/runs/masked_color/weights/best.pt', # masked_color
         source=masked_edge_image, # 中身は => 'solder/static/masked_edge/' + basename
-        data='solder/applications/yolov5/data/pbl02.yaml',
+        # data='solder/applications/yolov5/data/pbl02.yaml',
         # imgsz=(640, 640),  # inference size (height, width)
         # conf_thres=0.289,
         conf_thres=0.338, # masked_color
@@ -138,3 +138,19 @@ def run(
 
 
 """
+
+def clear_result(request, type_name):
+    print(type_name)
+    # if os.path.isfile('./solder/static/inspected_image/') == True:
+    print('EEE')
+    shutil.rmtree('./solder/static/inspected_image/')
+    os.makedirs('./solder/static/inspected_image/', exist_ok=True)
+
+    # if os.path.isfile('./solder/static/masked_edge/') == True:
+    shutil.rmtree('./solder/static/masked_edge/')
+    os.makedirs('./solder/static/masked_edge/', exist_ok=True)
+    
+    files = glob.glob('./solder/static/inspected_image/*.png')
+    cleared_row = {}
+    cleared_row['num_files'] = str(len(files))
+    return JsonResponse(cleared_row)

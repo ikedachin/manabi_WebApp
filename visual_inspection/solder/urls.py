@@ -8,4 +8,5 @@ urlpatterns = [
     path('index.html', views.Image_path.as_view(), name='index'),
     path('get_imge_path/<str:type_name>', views.get_image_path, name='get_image_path'),
     path('inspction_image/<str:type_name>', views.inspction_image, name='inspction_image'),
+    path('clear_result/<str:type_name>', views.clear_result, name='clear_result'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # 画像フォルダ追加時

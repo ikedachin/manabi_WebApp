@@ -13,6 +13,7 @@
     <div class="center">
         <button id="start_button" class="btn--orange">start</button>
         <button id="stop_button" class="btn--gray">stop</button><br>
+        <button id="clear_button" class="btn--gray">clear result</button><br>
     </div>
     <br>
     <br>
@@ -112,7 +113,7 @@
             // YOLOで推論
             let url_to_yolo = `{% url 'inspction_image' 'TYPE_PLACEHOLDER' %}`.replace('TYPE_PLACEHOLDER', p1.textContent);
             console.log(url_to_yolo);
-                
+            
             const yolo_inspetion = function(url_to_yolo) {
                 let anomaly_list = [];
                 fetch(url_to_yolo)
@@ -129,23 +130,33 @@
                             p3.textContent = names_dic[key] + ":  " + data[key] + "   "
                             console.log(key);
                         }
-                    
-                };
-                inferenceResult.textContent = "推論結果: 😱 " + p3.textContent;
+                        
+                    };
+                    inferenceResult.textContent = "推論結果: 😱 " + p3.textContent;
                 });
             };
             yolo_inspetion(url_to_yolo);
         };
-
+        
         const startButton = document.getElementById("start_button");
         const stopButton = document.getElementById("stop_button");
-
+        const clearButton = document.getElementById("clear_button");
+        
         startButton.addEventListener('click', function(e) {
             timer1 = setInterval(event, 2000);
         });
-
+        
         stopButton.addEventListener('click', function(e) {
             clearInterval(timer1);
+        })
+        
+        clearButton.addEventListener('click', function(e) {
+            let clear_url = `{% url 'clear_result' 'TYPE_PLACEHOLDER' %}`.replace('TYPE_PLACEHOLDER', "clear_files");
+            fetch(clear_url)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
         })
 
         // タイマー開始
