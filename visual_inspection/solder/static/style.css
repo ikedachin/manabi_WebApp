@@ -8,11 +8,15 @@ body {
 .width300 {
   width: 300px;
   vertical-align: top;
+  margin: 5;
+  background-color: #fff;
 }
 
 .height300 {
   height: 300px;
   vertical-align: top;
+  margin: 5;
+  background-color: #fff;
 }
 
 span.anomaly {
@@ -125,4 +129,8 @@ button.btn--radius {
 
 .center {
   text-align: center;
+}
+
+.right {
+  text-align: right;
 }

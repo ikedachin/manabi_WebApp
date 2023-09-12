@@ -62,8 +62,8 @@ def inspction_image(request, type_name):
         source=masked_edge_image, # 中身は => 'solder/static/masked_edge/' + basename
         # data='solder/applications/yolov5/data/pbl02.yaml',
         # imgsz=(640, 640),  # inference size (height, width)
-        # conf_thres=0.289,
-        conf_thres=0.338, # masked_color
+        conf_thres=0.238,
+        # conf_thres=0.338, # masked_color
         # conf_thres=0.589,
         # iou_thres=0.45,  # NMS IOU threshold
         # max_det=1000,  # maximum detections per image

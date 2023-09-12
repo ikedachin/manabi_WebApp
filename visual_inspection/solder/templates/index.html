@@ -13,7 +13,6 @@
     <div class="center">
         <button id="start_button" class="btn--orange">start</button>
         <button id="stop_button" class="btn--gray">stop</button><br>
-        <button id="clear_button" class="btn--gray">clear result</button><br>
     </div>
     <br>
     <br>
@@ -27,14 +26,18 @@
         <div class="center">
             <!-- <h2>入力画像</h2> -->
             <!-- <input type="img" id="imageInput" accept="image/*"> -->
-            <img id="input_image" src="" alt="選択された画像" class="height300" value="入力画像">
-            <img id="output_image" src="" alt="選択された画像" class="height300" value="推論画像">
+            <img id="input_image" src="../static/dxq.png" alt="選択された画像" class="height300" value="入力画像">
+            <img id="output_image" src="../static/dxq.png" alt="選択された画像" class="height300" value="推論画像">
         </div>
-    
+        
         <div>
         </div>
     </div>
-
+    <br>
+    <div class="right">
+        <button id="clear_button" class="btn--gray">clear result</button><br>
+    </div>
+    
     <script type="text/javascript" src="{% static 'main.js' %}"></script>
     <script>
         // ドキュメントの取得
@@ -95,9 +98,8 @@
         
         function event() {
             cnt++;
-            // if (cnt >= 15 && timer1 != null) {
+            // if (cnt >= 15 && timer1 != null) { // テスト用
             if (cnt >= images.length+1 && timer1 != null) { // 本番用
-                // 5回以上表示したら、タイマーを停止する
                 clearInterval(timer1);
             }
             // 1000ミリ秒ごとにコンソールに表示
@@ -124,15 +126,16 @@
                         // keyがanomaryから始まるものは別リスト
                         if (key == 'src') {
                             console.log(key);
-                            outputImage.src = data[key]
+                            outputImage.src = "";
+                            outputImage.src = data[key];
                             console.log(data[key]);
                         } else {
-                            p3.textContent = names_dic[key] + ":  " + data[key] + "   "
+                            p3.textContent = names_dic[key] + ":  " + data[key] + "   😱"
                             console.log(key);
                         }
                         
                     };
-                    inferenceResult.textContent = "推論結果: 😱 " + p3.textContent;
+                    inferenceResult.textContent = "推論結果:  " + p3.textContent;
                 });
             };
             yolo_inspetion(url_to_yolo);
