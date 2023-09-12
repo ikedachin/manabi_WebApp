@@ -49,7 +49,7 @@ import time
 def inspction_image(request, type_name):
     basename = type_name.replace('.jpeg', '.png')
     inspected_dir = './solder/static/inspected_image/'
-    masked_edge_image = 'solder/static/masked_edge/' + basename
+    masked_edge_image = 'solder/static/masked_image/' + basename
     masked_edge = crop_image(raw_images[type_name.split('.')[0]])
     cv2.imwrite(masked_edge_image, masked_edge)
     # print(masked_edge_image)
@@ -57,15 +57,15 @@ def inspction_image(request, type_name):
     # # 最もスコアの良かったモデルを使って予測する
     # python3 detect.py --weights ./runs/masked_edge/weights/best.pt  --source ../../static/masked_edge/ --save-txt
     run(
-        weights='solder/applications/yolov5/runs/masked_edge_96e/weights/best.pt', # masked_edge
+        weights='./solder/applications/yolov5/runs/masked_color_96e/weights/best.pt', # masked_edge
         # weights='solder/applications/yolov5/runs/masked_color/weights/best.pt', # masked_color
         source=masked_edge_image, # 中身は => 'solder/static/masked_edge/' + basename
         # data='solder/applications/yolov5/data/pbl02.yaml',
         # imgsz=(640, 640),  # inference size (height, width)
-        conf_thres=0.238,
-        # conf_thres=0.338, # masked_color
+        # conf_thres=0.038,
         # conf_thres=0.589,
-        # iou_thres=0.45,  # NMS IOU threshold
+        conf_thres=0.338, # masked_color
+        iou_thres=0.25,  # NMS IOU threshold 初期値0.45
         # max_det=1000,  # maximum detections per image
         # device='',  # cuda device, i.e. 0 or 0,1,2,3 or cpu
         # view_img=False,  # show results
