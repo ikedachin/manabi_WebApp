@@ -131,6 +131,10 @@ button.btn--radius {
   text-align: center;
 }
 
+.file_result {
+  margin-left: 30%;
+}
+
 .right {
   text-align: right;
 }

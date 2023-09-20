@@ -16,7 +16,7 @@
     </div>
     <br>
     <br>
-    <div>
+    <div class="file_result">
         <span id ="file_name" class="model_display">ファイル名:  </span><br>
         <!-- <span class="anomaly">推論結果:  </span> -->
         <span id="inference_result" class="anomaly">推論結果:  </span>
@@ -130,7 +130,8 @@
                             outputImage.src = data[key];
                             console.log(data[key]);
                         } else {
-                            p3.textContent = names_dic[key] + ":  " + data[key] + "   😱"
+                            p3.textContent = names_dic[key]
+                            p3.textContent += ":  " + data[key] + " 😱 "
                             console.log(key);
                         }
                         
