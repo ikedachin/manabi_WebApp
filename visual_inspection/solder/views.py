@@ -57,13 +57,12 @@ def inspction_image(request, type_name):
     # # 最もスコアの良かったモデルを使って予測する
     # python3 detect.py --weights ./runs/masked_edge/weights/best.pt  --source ../../static/masked_edge/ --save-txt
     run(
-        weights='./solder/applications/yolov5/runs/masked_color/weights/best.pt', # masked_edge
-        # weights='solder/applications/yolov5/runs/masked_color/weights/best.pt', # masked_color
+        # weights='./solder/applications/yolov5/runs/masked_color/weights/best.pt', # masked_edge
+        weights='solder/applications/yolov5/runs/masked_color/weights/best.pt', # masked_color
         source=masked_edge_image, # 中身は => 'solder/static/masked_edge/' + basename
         # data='solder/applications/yolov5/data/pbl02.yaml',
         # imgsz=(640, 640),  # inference size (height, width)
-        # conf_thres=0.038,
-        # conf_thres=0.589,
+        # conf_thres=0.001,
         conf_thres=0.455, # masked_color
         iou_thres=0.25,  # NMS IOU threshold 初期値0.45
         # max_det=1000,  # maximum detections per image
