@@ -1,5 +1,5 @@
 # 動作イメージ
-<img src='../image.png'>
+<img src='./image.png'>
 
 # 準備
 
