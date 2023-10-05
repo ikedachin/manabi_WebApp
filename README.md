@@ -1,3 +1,6 @@
+# 動作イメージ
+<img src='../image.png'>
+
 # 準備
 
 - make env
